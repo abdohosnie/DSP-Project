@@ -34,7 +34,7 @@ def main_menu():
 
     # Task 2 Button
     btn_task2 = tk.Button(
-        root, text="Task 2 - Coming Soon",
+        root, text="Task 2 - Signal Processing",
         command=lambda: run_script("task2_main.py"),
         font=("Arial", 12), width=25, bg="#2196F3", fg="white"
     )
