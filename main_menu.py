@@ -2,6 +2,8 @@ import tkinter as tk
 import subprocess
 import sys
 import os
+from tkinter import messagebox
+
 
 # Helper function to run another Python file
 def run_script(script_name):
