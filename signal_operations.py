@@ -105,3 +105,33 @@ def fold_signal(indices, samples):
     return folded_indices, folded_samples
 
 
+                   ############################
+                   ########## TASK 3 ##########
+                   ############################
+
+def quantize_signal(signal_values, num_levels=None, num_bits=None):
+    if num_bits is not None:
+        num_levels = 2 ** num_bits
+
+    if num_levels is None:
+        raise ValueError("You must provide either num_levels or num_bits")
+
+    # Compute min and max
+    min_val = np.min(signal_values)
+    max_val = np.max(signal_values)
+
+    # Step size (Δ)
+    delta = (max_val - min_val) / (num_levels - 1)
+
+    # Quantize
+    quantized_values = np.round((signal_values - min_val) / delta) * delta + min_val
+
+    # Quantization error
+    error = signal_values - quantized_values
+
+    # Encode each level as binary
+    binary_length = int(np.log2(num_levels))
+    levels = np.round((quantized_values - min_val) / delta).astype(int)
+    encoded = [format(level, f'0{binary_length}b') for level in levels]
+
+    return quantized_values, error, encoded
